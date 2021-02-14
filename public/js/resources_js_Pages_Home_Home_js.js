@@ -13,12 +13,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _Layouts_Index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Layouts/Index */ "./resources/js/Layouts/Index.js");
+
 
 
 
 function Home() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Hello world");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Welcome to Mind Maker");
 }
+
+Home.layout = function (page) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Layouts_Index__WEBPACK_IMPORTED_MODULE_2__.default, {
+    value: "Cheddar",
+    children: page
+  });
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 
