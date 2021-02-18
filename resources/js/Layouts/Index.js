@@ -4,12 +4,12 @@ import React from 'react'
 import { render } from 'react-dom'
 
 
-const app = document.getElementById('app')
+// const app = document.getElementById('app')
 
 function Index({value, children}){
   return(
     <>
-      <h1>
+      <h1 className="text-8xl">
         {value}
       </h1>
       {children}

@@ -4,7 +4,7 @@ import Index from '../../Layouts/Index'
 
 function Home () {
   return(
-    <h2>Welcome to Mind Maker</h2>
+    <h1>Welcome to Mind Maker</h1>
   )
 }
 
