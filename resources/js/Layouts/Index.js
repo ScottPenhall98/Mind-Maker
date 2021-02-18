@@ -9,7 +9,7 @@ import { render } from 'react-dom'
 function Index({value, children}){
   return(
     <>
-      <h1 className="text-8xl">
+      <h1 className="text-8xl text-burple">
         {value}
       </h1>
       {children}
