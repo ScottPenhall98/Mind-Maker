@@ -8,6 +8,10 @@ module.exports = {
   theme: {
     colors:{
       burple: '6100ff',
+      white: '#fff',
+      gray: {
+        darkTheme: '#5a5a5a'
+      }
     },
     extend: {},
   },

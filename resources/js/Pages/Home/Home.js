@@ -8,6 +8,6 @@ function Home () {
   )
 }
 
-Home.layout = page => <Index value={"Cheddar"} children={page}/>;
+Home.layout = page => <Index children={page}/>;
 
 export default Home;

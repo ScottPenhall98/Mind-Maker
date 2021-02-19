@@ -1,21 +1,17 @@
+import React from 'react';
+import LeftNav from './LeftNav';
 
-import { App } from '@inertiajs/inertia-react'
-import React from 'react'
-import { render } from 'react-dom'
+function Index({value, children}) {
+  return (
+    <div className={'flex min-h-screen'}>
+      <LeftNav/>
+      <div className="flex-grow bg-gray-darkTheme">
+          {children}
+      </div>
 
-
-// const app = document.getElementById('app')
-
-function Index({value, children}){
-  return(
-    <>
-      <h1 className="text-8xl text-burple">
-        {value}
-      </h1>
-      {children}
-    </>
-  )
+    </div>
+  );
 
 }
 
-export default Index
+export default Index;
