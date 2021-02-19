@@ -25,7 +25,7 @@ function LeftNav(){
       active: isActive("hardCopy")
     }
   ]
-  
+
   return(
     <div className="w-72 bg-gray-leftNav">
       <h1 className="text-center text-4xl text-white uppercase">
