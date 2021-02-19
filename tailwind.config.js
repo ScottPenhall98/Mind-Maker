@@ -10,7 +10,9 @@ module.exports = {
       burple: '6100ff',
       white: '#fff',
       gray: {
-        darkTheme: '#5a5a5a'
+        leftNav: '#343434',
+        darkTheme: '#272727',
+        active: '#5a5a5a'
       }
     },
     extend: {},

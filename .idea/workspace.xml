@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e796b9ae-d501-4ca2-b9c3-ed045e875a0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/Layouts/LeftNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Mind-Maker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Mind-Maker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Layouts/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Layouts/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Layouts/LeftNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Layouts/LeftNav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,6 +139,7 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/tightenco/ziggy" />
     </include_path>
   </component>
   <component name="ProjectId" id="1oRlrHchByR10gfxLV6yCbUHUHi" />
@@ -171,7 +182,7 @@
       <workItem from="1613280864816" duration="2008000" />
       <workItem from="1613627800230" duration="2045000" />
       <workItem from="1613674800247" duration="2176000" />
-      <workItem from="1613710284936" duration="832000" />
+      <workItem from="1613710284936" duration="4241000" />
     </task>
     <servers />
   </component>

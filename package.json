@@ -27,6 +27,7 @@
         "@inertiajs/inertia-react": "^0.5.3",
         "@inertiajs/progress": "^0.2.4",
         "react": "^17.0.1",
-        "react-dom": "^17.0.1"
+        "react-dom": "^17.0.1",
+        "ziggy-js": "^1.0.5"
     }
 }
