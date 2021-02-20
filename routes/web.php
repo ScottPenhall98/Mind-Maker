@@ -15,3 +15,4 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'show'])->name('home');
+Route::get('/discogs', [HomeController::class, 'discogsSelector'])->name('discogsSelector');

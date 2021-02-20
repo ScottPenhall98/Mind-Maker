@@ -11,4 +11,7 @@ class HomeController extends Controller
     {
         return Inertia::render('Home/Home');
     }
+    public function  discogsSelector(){
+        return Inertia::render('Discogs/DiscogsSelector');
+    }
 }

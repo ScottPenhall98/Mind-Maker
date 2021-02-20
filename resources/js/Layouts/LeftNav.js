@@ -11,13 +11,13 @@ function LeftNav(){
   const items = [
     {
       title: "Home",
-      href: "" ,
+      href: route("home"),
       active: isActive('home')
     },
     {
       title: "Discogs Selector",
-      href: "" ,
-      active: isActive("discogs")
+      href: route('discogsSelector') ,
+      active: isActive("discogsSelector")
     },
     {
       title: "Price Charting Selector",
@@ -33,7 +33,7 @@ function LeftNav(){
       </h1>
       <div className="mt-5 flex flex-col">
         {(items.map(item => (
-          <Link key={item.title} href={route('home')} className={`${item.active ? 'bg-gray-active' : 'bg-gray-darkTheme'} text-white text-lg`}>
+          <Link key={item.title} href={item.href} className={`${item.active ? 'bg-gray-active' : 'bg-gray-darkTheme'} text-white text-lg`}>
             {item.title}
           </Link>
         )))}
