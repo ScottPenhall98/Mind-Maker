@@ -16,9 +16,7 @@ module.exports = {
       },
     },
     extend: {
-      animation: {
-        'spin-slow': 'spin-anti-clockwise 1s linear infinite',
-      },
+      animation: {},
       keyframes: {
         'spin-anti-clockwise': {
           '0%' : {transform: 'rotate(360deg)'},
