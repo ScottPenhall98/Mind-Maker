@@ -3,6 +3,20 @@ import Index from '../../Layouts/Index';
 import wheel from '../../../images/wheelyGoodImage.png';
 
 function DiscogsSelector() {
+  //
+  // const antiClockWise = `
+  //   @keyframes spin-anti-clockwise {
+  //     '0%' : {transform: 'rotate(360deg)'},
+  //     '100%': {transform: 'rotate(0deg)'},
+  //   }
+  // `;
+  //
+  // const clockWise = `
+  //   @keyframes spin-clockwise {
+  //     from: {transform: rotate(0deg)},
+  //     to : {transform: rotate(360deg)},
+  //   }
+  // `;
 
   const [degrees, setDegrees] = useState(0);
   const [canvas, setCanvas] = useState();
@@ -86,17 +100,20 @@ function DiscogsSelector() {
     setMouseIsDown(false);
     console.log('up');
   };
-
+  //get 10 degrees of movement then calculate the speed
+  //how to calculate, speed
+  //- speed is based off of seconds in a spin
   return (
     <div className="w-full h-full" onMouseMove={mouseMove} onMouseUp={mouseUp}>
-      {/*animate-spin-slow*/}
       <canvas
-        style={{transform: `rotate(${degrees}deg)`}}
+        // style={{transform: `rotate(${degrees}deg)`}}
+        style={{
+          animation: 'spin-anti-clockwise 1s linear infinite',
+        }}
         className="m-10"
         ref={canvas => setCanvas(canvas)}
         onMouseDown={mouseDown}
         width={750} height={750}/>
-      {/*<img src={wheel} onMouseDown={mouseDown} onMouseUp={mouseUp} className={"w-3/4 p-4"}/>*/}
     </div>
   );
 }

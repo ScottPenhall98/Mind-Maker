@@ -17,12 +17,16 @@ module.exports = {
     },
     extend: {
       animation: {
-        'spin-slow': 'spin-anti-clockwise 0.5s linear infinite',
+        'spin-slow': 'spin-anti-clockwise 1s linear infinite',
       },
       keyframes: {
         'spin-anti-clockwise': {
           '0%' : {transform: 'rotate(360deg)'},
           '100%': {transform: 'rotate(0deg)'},
+        },
+        'spin-clockwise': {
+          '0%' : {transform: 'rotate(0deg)'},
+          '100%': {transform: 'rotate(360deg)'},
         },
       },
     },
