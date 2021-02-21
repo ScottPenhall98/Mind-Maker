@@ -30,7 +30,7 @@ function DiscogsSelector() {
       };
     }
   });
-  const calculateFirstPosition = (posX, posY, canvasPosCenterX, canvasPosCenterY) => {
+  const calculateAngle = (posX, posY, canvasPosCenterX, canvasPosCenterY) => {
     if (posX >= canvasPosCenterX && posY <= canvasPosCenterY) {
       return Math.atan((posX - canvasPosCenterX) / (canvasPosCenterY - posY)) * (180 / Math.PI);
     }
@@ -44,47 +44,14 @@ function DiscogsSelector() {
       return Math.atan((canvasPosCenterY - posY) / (canvasPosCenterX - posX)) * (180 / Math.PI) + 270;
     }
   };
-  const calculateDegrees = (posX, posY) => {
-    //problem is canvasCenterPositionWontBeSet
-    if (posX >= canvasPosition.centerPos.x && posY <= canvasPosition.centerPos.y) {
-      let angle = Math.atan((posX - canvasPosition.centerPos.x) / (canvasPosition.centerPos.y - posY)) * (180 / Math.PI);
+  const newDegrees = (posX, posY) => {
+      let angle = calculateAngle(posX, posY, canvasPosition.centerPos.x, canvasPosition.centerPos.y)
       let angleOfChange = angle - firstPos;
       if(firstMove){
         return angleOfChange
       }else {
         return degrees + angleOfChange
       }
-
-    }
-    if (posX > canvasPosition.centerPos.x && posY > canvasPosition.centerPos.y) {
-      let angle = Math.atan((posY - canvasPosition.centerPos.y) / (posX - canvasPosition.centerPos.x)) * (180 / Math.PI) + 90;
-      let angleOfChange = angle - firstPos;
-      if(firstMove){
-        return angleOfChange
-      }else {
-        return degrees + angleOfChange
-      }
-    }
-    if (posX <= canvasPosition.centerPos.x && posY > canvasPosition.centerPos.y) {
-      //x/y
-      let angle = Math.atan((canvasPosition.centerPos.x - posX) / (posY - canvasPosition.centerPos.y)) * (180 / Math.PI) + 180;
-      let angleOfChange = angle - firstPos;
-      if(firstMove){
-        return angleOfChange
-      }else {
-        return degrees + angleOfChange
-      }
-    }
-    if (posX <= canvasPosition.centerPos.x && posY < canvasPosition.centerPos.y) {
-      //y/x
-      let angle = Math.atan((canvasPosition.centerPos.y - posY) / (canvasPosition.centerPos.x - posX)) * (180 / Math.PI) + 270;
-      let angleOfChange = angle - firstPos;
-      if(firstMove){
-        return angleOfChange
-      }else {
-        return degrees + angleOfChange
-      }
-    }
   };
 
   const mouseDown = (e) => {
@@ -103,7 +70,7 @@ function DiscogsSelector() {
           y: canvasCenterY
         },
       });
-      setFirstPos(calculateFirstPosition(e.pageX, e.pageY, canvasCenterX, canvasCenterY));
+      setFirstPos(calculateAngle(e.pageX, e.pageY, canvasCenterX, canvasCenterY));
 
     }
     //Now change calculateSetDegrees too a function that returns degrees
@@ -112,7 +79,7 @@ function DiscogsSelector() {
   };
   const mouseMove = (e) => {
     if (mouseIsDown) {
-      setDegrees(calculateDegrees(e.pageX, e.pageY));
+      setDegrees(newDegrees(e.pageX, e.pageY));
     }
   };
 
