@@ -59,9 +59,9 @@ function DiscogsSelector() {
     setMouseIsDown(true);
     setFirstMove(true);
 
+    let canvasCenterX =  e.target.offsetLeft + (e.target.width / 2)
+    let canvasCenterY = e.target.offsetTop + (e.target.height / 2)
     if (canvasPosition.width === 0) {
-      let canvasCenterX =  e.target.offsetLeft + (e.target.width / 2)
-      let canvasCenterY = e.target.offsetTop + (e.target.height / 2)
       setCanvasPosition({
         width: e.target.width,
         height: e.target.height,
@@ -70,9 +70,8 @@ function DiscogsSelector() {
           y: canvasCenterY
         },
       });
-      setFirstPos(calculateAngle(e.pageX, e.pageY, canvasCenterX, canvasCenterY));
-
     }
+    setFirstPos(calculateAngle(e.pageX, e.pageY, canvasCenterX, canvasCenterY));
     //Now change calculateSetDegrees too a function that returns degrees
 
 
