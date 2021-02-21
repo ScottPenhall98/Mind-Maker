@@ -1,27 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import Index from '../../Layouts/Index';
-import wheel from '../../../images/wheelyGoodImage.png'
+import wheel from '../../../images/wheelyGoodImage.png';
 
 function DiscogsSelector() {
 
   const [degrees, setDegrees] = useState(0);
   const [canvas, setCanvas] = useState();
   const [mouseIsDown, setMouseIsDown] = useState(false);
-  const [firstClick, setFirstClick] = useState(false);
+  const [firstMove, setFirstMove] = useState(false);
   const [firstPos, setFirstPos] = useState(0);
   const [canvasPosition, setCanvasPosition] = useState(
     {
       width: 0,
       height: 0,
       centerPos: {
-        x:0,
-        y:0,
-      }
-    }
+        x: 0,
+        y: 0,
+      },
+    },
   );
 
   useEffect(() => {
-    if(canvas !== undefined) {
+    if (canvas !== undefined) {
       const context = canvas.getContext('2d');
       const image = new Image();
       image.src = wheel;
@@ -30,66 +30,96 @@ function DiscogsSelector() {
       };
     }
   });
-  const calculateAndSetDegrees = (posX, posY) => {
-    if(posX >= canvasPosition.centerPos.x && posY <= canvasPosition.centerPos.y){
-      let angle = Math.atan((posX - canvasPosition.centerPos.x)/(canvasPosition.centerPos.y - posY))  * (180 / Math.PI);
-      let angleOfChange = angle - firstPos
-      //set first click to the 0 position somehow, angle of change will be
-      if(firstClick){
-
-      }else{
-        setDegrees(degrees + angleOfChange)
+  const calculateFirstPosition = (posX, posY, canvasPosCenterX, canvasPosCenterY) => {
+    if (posX >= canvasPosCenterX && posY <= canvasPosCenterY) {
+      return Math.atan((posX - canvasPosCenterX) / (canvasPosCenterY - posY)) * (180 / Math.PI);
+    }
+    if (posX > canvasPosCenterX && posY > canvasPosCenterY) {
+      return Math.atan((posY - canvasPosCenterY) / (posX - canvasPosCenterX)) * (180 / Math.PI) + 90;
+    }
+    if (posX <= canvasPosCenterX && posY > canvasPosCenterY) {
+      return Math.atan((canvasPosCenterX - posX) / (posY - canvasPosCenterY)) * (180 / Math.PI) + 180;
+    }
+    if (posX <= canvasPosCenterX && posY < canvasPosCenterY) {
+      return Math.atan((canvasPosCenterY - posY) / (canvasPosCenterX - posX)) * (180 / Math.PI) + 270;
+    }
+  };
+  const calculateDegrees = (posX, posY) => {
+    //problem is canvasCenterPositionWontBeSet
+    if (posX >= canvasPosition.centerPos.x && posY <= canvasPosition.centerPos.y) {
+      let angle = Math.atan((posX - canvasPosition.centerPos.x) / (canvasPosition.centerPos.y - posY)) * (180 / Math.PI);
+      let angleOfChange = angle - firstPos;
+      if(firstMove){
+        return angleOfChange
+      }else {
+        return degrees + angleOfChange
       }
 
-      setFirstClick(false);
     }
-    if(posX > canvasPosition.centerPos.x && posY > canvasPosition.centerPos.y){
-      let angle = Math.atan((posY - canvasPosition.centerPos.y)/(posX - canvasPosition.centerPos.x))  * (180 / Math.PI) + 90;
-      let angleOfChange = angle - degrees
-      setDegrees(degrees + angleOfChange)
+    if (posX > canvasPosition.centerPos.x && posY > canvasPosition.centerPos.y) {
+      let angle = Math.atan((posY - canvasPosition.centerPos.y) / (posX - canvasPosition.centerPos.x)) * (180 / Math.PI) + 90;
+      let angleOfChange = angle - firstPos;
+      if(firstMove){
+        return angleOfChange
+      }else {
+        return degrees + angleOfChange
+      }
     }
-    if(posX <= canvasPosition.centerPos.x && posY > canvasPosition.centerPos.y){
+    if (posX <= canvasPosition.centerPos.x && posY > canvasPosition.centerPos.y) {
       //x/y
-      let angle = Math.atan((canvasPosition.centerPos.x - posX)/(posY - canvasPosition.centerPos.y))  * (180 / Math.PI) + 180;
-      let angleOfChange = angle - degrees
-      setDegrees(degrees + angleOfChange)
+      let angle = Math.atan((canvasPosition.centerPos.x - posX) / (posY - canvasPosition.centerPos.y)) * (180 / Math.PI) + 180;
+      let angleOfChange = angle - firstPos;
+      if(firstMove){
+        return angleOfChange
+      }else {
+        return degrees + angleOfChange
+      }
     }
-    if(posX <= canvasPosition.centerPos.x && posY < canvasPosition.centerPos.y){
+    if (posX <= canvasPosition.centerPos.x && posY < canvasPosition.centerPos.y) {
       //y/x
-      let angle = Math.atan((canvasPosition.centerPos.y - posY)/(canvasPosition.centerPos.x - posX))  * (180 / Math.PI) + 270;
-      let angleOfChange = angle - degrees
-      setDegrees(degrees + angleOfChange)
+      let angle = Math.atan((canvasPosition.centerPos.y - posY) / (canvasPosition.centerPos.x - posX)) * (180 / Math.PI) + 270;
+      let angleOfChange = angle - firstPos;
+      if(firstMove){
+        return angleOfChange
+      }else {
+        return degrees + angleOfChange
+      }
     }
-  }
+  };
 
   const mouseDown = (e) => {
     //Set transform degrees
     setMouseIsDown(true);
-    setFirstClick(true);
-    //Now change calculateSetDegrees too a function that returns degrees
-    setFirstPos();
-    if(canvasPosition.width === 0){
+    setFirstMove(true);
+
+    if (canvasPosition.width === 0) {
+      let canvasCenterX =  e.target.offsetLeft + (e.target.width / 2)
+      let canvasCenterY = e.target.offsetTop + (e.target.height / 2)
       setCanvasPosition({
         width: e.target.width,
         height: e.target.height,
         centerPos: {
-          x: e.target.offsetLeft + (e.target.width / 2),
-          y: e.target.offsetTop + (e.target.height / 2),
-        }
-      })
-    }
+          x: canvasCenterX,
+          y: canvasCenterY
+        },
+      });
+      setFirstPos(calculateFirstPosition(e.pageX, e.pageY, canvasCenterX, canvasCenterY));
 
-  }
-  const mouseMove = (e) => {
-    if(mouseIsDown){
-      calculateAndSetDegrees(e.pageX, e.pageY)
     }
-  }
+    //Now change calculateSetDegrees too a function that returns degrees
+
+
+  };
+  const mouseMove = (e) => {
+    if (mouseIsDown) {
+      setDegrees(calculateDegrees(e.pageX, e.pageY));
+    }
+  };
 
   const mouseUp = (e) => {
     setMouseIsDown(false);
-    console.log('up')
-  }
+    console.log('up');
+  };
 
   return (
     <div className="w-full h-full" onMouseMove={mouseMove} onMouseUp={mouseUp}>
