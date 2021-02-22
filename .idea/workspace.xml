@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e796b9ae-d501-4ca2-b9c3-ed045e875a0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Discogs/SelectorWheel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Discogs/DiscogsSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Discogs/DiscogsSelector.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Discogs/SelectorWheel.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Discogs/SelectorWheel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +173,7 @@
       <workItem from="1613627800230" duration="2045000" />
       <workItem from="1613674800247" duration="2176000" />
       <workItem from="1613710284936" duration="11325000" />
-      <workItem from="1613846306950" duration="23755000" />
+      <workItem from="1613846306950" duration="29147000" />
     </task>
     <servers />
   </component>
