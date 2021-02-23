@@ -6,17 +6,12 @@ function SelectorWheel() {
   const [degrees, setDegrees] = useState(0);
   const [canvas, setCanvas] = useState();
   const [mouseIsDown, setMouseIsDown] = useState(false);
-  const [firstMove, setFirstMove] = useState(false);
+  const [clockwise, setClockWise] = useState(false);
+  const [spinning, setSpinning] = useState(false);
+  const [speed, setSpeed] = useState(0);
   const [firstPos, setFirstPos] = useState(0);
-  const [startTime, setStartTime] = useState();
-
-  /* Storages an array of objects that looks like:
-        {
-          time: 0.02s,
-          degreesOfMovement: -0.123
-        }
-   */
-  const [timeStorage, setTimeStorage] = useState([]);
+  const [timeOne, setTimeOne] = useState();
+  const [timeTwo, setTimeTwo] = useState();
   const [canvasPosition, setCanvasPosition] = useState(
     {
       width: 0,
@@ -27,18 +22,6 @@ function SelectorWheel() {
       },
     },
   );
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log('This will run every second!');
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // })
-
-  // var stopTimer = (timer) => {
-  //   console.log("here")
-  //   clearInterval(timer);
-  // }
-
 
   useEffect(() => {
     if (canvas !== undefined) {
@@ -66,54 +49,77 @@ function SelectorWheel() {
   };
 
   const newDegrees = (posX, posY) => {
-    let angle = calculateAngle(posX, posY, canvasPosition.centerPos.x, canvasPosition.centerPos.y);
+    const angle = calculateAngle(posX, posY, canvasPosition.centerPos.x, canvasPosition.centerPos.y);
 
-    let angleOfChange = angle - firstPos;
-
-    let newTime = {
-      time: Date.now() - startTime,
+    const angleOfChange = angle - firstPos;
+    if(timeTwo){
+      setTimeOne(timeTwo)
+    }
+    const newTime = {
+      time: Date.now(),
       degreesOfMovement: angleOfChange
     }
-    // TODO check the total of degrees in time storage = 10, then start removing the first element in the array
-    setTimeStorage(timeStorage.concat(newTime))
+    setTimeTwo(newTime)
     return angleOfChange;
 
   };
 
   const mouseDown = (e) => {
-    //Set transform degrees
-    setMouseIsDown(true);
-    //TODO start timer
-    setStartTime(Date.now())
-    setFirstMove(true);
-    let canvasCenterX = e.target.offsetLeft + (e.target.width / 2);
-    let canvasCenterY = e.target.offsetTop + (e.target.height / 2);
-    if (canvasPosition.width === 0) {
-      setCanvasPosition({
-        width: e.target.width,
-        height: e.target.height,
-        centerPos: {
-          x: canvasCenterX,
-          y: canvasCenterY,
-        },
-      });
+    if(!spinning){
+      setMouseIsDown(true);
+      setTimeOne({
+        time: Date.now(),
+        degreesOfMovement: 0
+      })
+      let canvasCenterX = e.target.offsetLeft + (e.target.width / 2);
+      let canvasCenterY = e.target.offsetTop + (e.target.height / 2);
+      if (canvasPosition.width === 0) {
+        setCanvasPosition({
+          width: e.target.width,
+          height: e.target.height,
+          centerPos: {
+            x: canvasCenterX,
+            y: canvasCenterY,
+          },
+        });
+      }
+      setFirstPos(calculateAngle(e.pageX, e.pageY, canvasCenterX, canvasCenterY));
+      //Now change calculateSetDegrees too a function that returns degrees
+
     }
-    setFirstPos(calculateAngle(e.pageX, e.pageY, canvasCenterX, canvasCenterY));
-    //Now change calculateSetDegrees too a function that returns degrees
-
-
+    //Set transform degrees
   };
+
+
   const mouseMove = (e) => {
     if (mouseIsDown) {
       setDegrees(newDegrees(e.pageX, e.pageY));
     }
   };
 
+  const calculateSpeed = () =>{
+    if(timeTwo){
+      let distanceTraveled = timeTwo.degreesOfMovement - timeOne.degreesOfMovement
+      //if number is positive set spin to clockwise
+      distanceTraveled < 0 ? setClockWise(false) : setClockWise(true)
+      //now set distance traveled to positive
+
+      const percentageOfOneRevolution = (Math.abs(distanceTraveled)/360) * 100
+      //how many sof the percentage of one revolution increment can fit into the wheel
+      const distancesInWheel = 100/percentageOfOneRevolution
+
+      const time = (timeTwo.time - timeOne.time)
+      setSpeed(time / 1000 * distancesInWheel);
+      setSpinning(true);
+      //TODO could simply just get distanceTraveled/360. DO A TEST
+      //TODO set spinning to true
+    }
+
+  }
+
   const mouseUp = (e) => {
     setMouseIsDown(false);
-    // stopTimer(startTimer);
-    // clearInterval(startTimer)
-    console.log('up');
+    calculateSpeed()
   };
   //get 10 degrees of movement then calculate the speed
   //how to calculate, speed
@@ -121,10 +127,10 @@ function SelectorWheel() {
   return (
     <div className="w-full h-full" onMouseMove={mouseMove} onMouseUp={mouseUp}>
       <canvas
-        style={{transform: `rotate(${degrees}deg)`}}
-        // style={{
-        //   animation: 'spin-clockwise 1s linear infinite',
-        // }}
+        style={spinning ? {
+            animation: `${clockwise ? 'spin-clockwise ' : 'spin-anti-clockwise ' } ${speed}s linear infinite`}
+          :
+          {transform: `rotate(${degrees}deg)`}}
         className="m-10"
         ref={canvas => setCanvas(canvas)}
         onMouseDown={mouseDown}
