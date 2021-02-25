@@ -19,12 +19,17 @@ module.exports = {
       animation: {},
       keyframes: {
         'spin-anti-clockwise': {
-          '0%' : {transform: 'rotate(360deg)'},
-          '100%': {transform: 'rotate(0deg)'},
+          '0%' : {transform: 'rotate(var(--rotate-end))'},
+          '100%': {transform: 'rotate(var(--rotate-start))'},
+          //
+          // '0%' : {transform: 'rotate(360deg)'},
+          // '100%': {transform: 'rotate(0deg)'},
         },
         'spin-clockwise': {
-          '0%' : {transform: 'rotate(0deg)'},
-          '100%': {transform: 'rotate(360deg)'},
+          '0%' : {transform: 'rotate(var(--rotate-start))'},
+          '100%': {transform: 'rotate(var(--rotate-end))'},
+          // '0%' : {transform: 'rotate(0deg)'},
+          // '100%': {transform: 'rotate(360deg)'},
         },
       },
     },
