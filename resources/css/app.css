@@ -5,4 +5,5 @@
 #app {
     --rotate-start: 0deg;
     --rotate-end: 360deg;
+    --speed: 0s;
 }

@@ -16,7 +16,10 @@ module.exports = {
       },
     },
     extend: {
-      animation: {},
+      animation: {
+        'anti-clockwise': 'spin-anti-clockwise var(--speed) linear infinite',
+        'clockwise': 'spin-clockwise var(--speed) linear infinite',
+      },
       keyframes: {
         'spin-anti-clockwise': {
           '0%' : {transform: 'rotate(var(--rotate-end))'},

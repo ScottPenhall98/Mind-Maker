@@ -23,6 +23,7 @@ function SelectorWheel() {
     },
   );
 
+
   useEffect(() => {
     if (canvas !== undefined) {
       const context = canvas.getContext('2d');
@@ -32,7 +33,22 @@ function SelectorWheel() {
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
       };
     }
+    const interval = setInterval(() => {
+      if(spinning){
+        const app = document.getElementById("app");
+        const currentSpeed = app.style.getPropertyValue('--speed').split('s')[0]
+        if(currentSpeed && currentSpeed < 2.4){
+          const newSpeed = parseFloat(currentSpeed) + 0.0005
+          app.style.setProperty('--speed', newSpeed + "s")
+        }else{
+          app.style.setProperty('--speed', 0 + "s")
+          setSpinning(false)
+        }
+      }
+    }, 1);
+    return () => clearInterval(interval);
   });
+
   const calculateAngle = (posX, posY, canvasPosCenterX, canvasPosCenterY) => {
     if (posX >= canvasPosCenterX && posY <= canvasPosCenterY) {
       return Math.atan((posX - canvasPosCenterX) / (canvasPosCenterY - posY)) * (180 / Math.PI);
@@ -115,8 +131,9 @@ function SelectorWheel() {
       let endRotate = (degrees + 360)
       app.style.setProperty('--rotate-start', degrees + "deg");
       app.style.setProperty('--rotate-end', endRotate + "deg");
+      app.style.setProperty('--speed', time / 1000 * distancesInWheel + "s")
 
-      setSpeed(time / 1000 * distancesInWheel);
+      // setSpeed(time / 1000 * distancesInWheel);
       setSpinning(true);
       //TODO could simply just get distanceTraveled/360. DO A TEST
     }
@@ -130,14 +147,12 @@ function SelectorWheel() {
   //get 10 degrees of movement then calculate the speed
   //how to calculate, speed
   //- speed is based off of seconds the last 10 degrees
+
   return (
     <div className="w-full h-full" onMouseMove={mouseMove} onMouseUp={mouseUp}>
       <canvas
-        style={spinning ? {
-            animation: `${clockwise ? 'spin-clockwise ' : 'spin-anti-clockwise ' } ${speed}s linear infinite`}
-          :
-          {transform: `rotate(${degrees}deg)`}}
-        className="m-10"
+        style={spinning ?  {transform: `rotate(0deg)`}: {transform: `rotate(${degrees}deg)`}}
+        className={`m-10 ${clockwise ? 'animate-clockwise' : 'animate-anti-clockwise'}`}
         ref={canvas => setCanvas(canvas)}
         onMouseDown={mouseDown}
         width={750} height={750}/>
