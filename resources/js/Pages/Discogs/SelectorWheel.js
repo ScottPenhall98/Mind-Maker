@@ -101,7 +101,8 @@ function SelectorWheel() {
     if(timeTwo){
       let distanceTraveled = timeTwo.degreesOfMovement - timeOne.degreesOfMovement
       //if number is positive set spin to clockwise
-      distanceTraveled < 0 ? setClockWise(false) : setClockWise(true)
+      let isClockwise = distanceTraveled > 0
+      setClockWise(isClockwise)
       //now set distance traveled to positive
 
       const percentageOfOneRevolution = (Math.abs(distanceTraveled)/360) * 100
@@ -109,10 +110,15 @@ function SelectorWheel() {
       const distancesInWheel = 100/percentageOfOneRevolution
 
       const time = (timeTwo.time - timeOne.time)
+      let app = document.getElementById("app");
+
+      let endRotate = (degrees + 360)
+      app.style.setProperty('--rotate-start', degrees + "deg");
+      app.style.setProperty('--rotate-end', endRotate + "deg");
+
       setSpeed(time / 1000 * distancesInWheel);
       setSpinning(true);
       //TODO could simply just get distanceTraveled/360. DO A TEST
-      //TODO set spinning to true
     }
 
   }
