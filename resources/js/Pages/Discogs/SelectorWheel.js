@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import wheel from '../../../images/wheelyGoodImage.png';
 
+// const Discogs = require('disconnect').Client
+
+
 function SelectorWheel() {
 
   const [degrees, setDegrees] = useState(0);
@@ -47,6 +50,11 @@ function SelectorWheel() {
       }
     }, 1);
     return () => clearInterval(interval);
+
+    // var col = new Discogs().user().collection();
+    // col.getReleases('dodpoo6', 0, {page: 1, per_page: 75}, function(err, data){
+    //   console.log(data);
+    // });
   });
 
   const calculateAngle = (posX, posY, canvasPosCenterX, canvasPosCenterY) => {
